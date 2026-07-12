@@ -1,30 +1,30 @@
-> Generated 2026-07-12 by /end-session at commit 8853b0e.
+> Generated 2026-07-12 by /end-session at commit ffc5653.
 
 # STATUS
 
 ## Where things stand
 
-Day one. The project workflow skeleton is scaffolded and pushed to GitHub — README, CLAUDE.md, spec.md, decisions.md, MAP.md, STATUS.md, `journal/`, `sessions/`, and the two per-repo skills (`end-session`, `weekly-reconciliation`). No product work yet.
+The **spec is complete and is the design of record.** This session turned `spec.md` from a stub into a full design and stood up the build roadmap.
 
-The **goal** is set (see `spec.md`): a prototype tool that, for an open question, identifies the *crux* — the sub-question whose resolution most changes the answer — and surfaces promising research that may imminently resolve it. For the Future of Life Foundation "Epistemic Case Study Competition."
+The tool is a **Claude skillset** (not an app): hand Claude the skills + an open question, and it runs a 5-step pipeline — *operationalize → lit-review with validity grading → find cruxes → find pending evidence → pre-register update rules* — emitting a **crux watch-list artifact** ("here are the cruxes; watch these spaces; when they report, here's how to update"). Scope is a **question class defined by two properties** (unresolved *and* fast-moving in new study evidence), showcased on the eggs case plus similar egg-like questions — deliberately *not* the competition's COVID/black-hole cases, which fail the "live evidence incoming" property.
 
-Current thinking: the tool will be mostly markdown that instructs future Claudes (prompts, playbooks, worked case studies). **Stack, commands, and the crux-identification approach are all deliberately undecided.** The next session's real work is fleshing out `spec.md` — the competition deliverable / eval criteria, the approach, and the case-study data model.
+Key design commitments now locked: **self-containment & tool-agnosticism** (skills depend only on concepts we author + web search; tools are optional accelerators; this is also the licensing firewall), **calibrated humility** (refusal/`gaps[]` over confident error), and **no-overclaim** (VOI and Rootclaim borrowed as qualitative logic, not numeric computation). Prior art is mapped per step and a licensing audit cleared every borrow (§102(b): methods aren't copyrightable; a few verbatim/trademark don'ts recorded). Novel contribution = the one-shot seam **crux → pending evidence → pre-registered update rule**; we do *not* build the over-time updating loop (the user's larger project).
+
+Next session is **build**: author the skills (Milestone #2), produce the eggs worked example + 2 generalizability cases, and write the ≤10-page submission. Deadline **2026-07-19**.
 
 ## Derived facts (from CLAUDE.md commands)
 
-- Tracked `.md` files: **8** (`git ls-files '*.md' | wc -l`)
+- Tracked `.md` files: **9** (`git ls-files '*.md' | wc -l`)
 - `case-studies/`: does not exist yet (`ls case-studies/` → 0)
 - Test status: no harness yet (TBD)
-- Working tree: clean; HEAD `8853b0e` (`git status --short`, `git rev-parse --short HEAD`)
-- Open Issues: **4**, all under Spec complete (`gh issue list --state open`)
+- Working tree at generation: `spec.md`, `decisions.md` modified (committed in this session's commit); HEAD `ffc5653` (`git status --short`, `git rev-parse --short HEAD`)
+- Open Issues: **17** (#5–#21), all under Milestone #2 (`gh issue list --state open`)
 
 ## Active Milestone
 
-**Spec complete** — https://github.com/lux-username/epistemic/milestone/1. Four scoping Issues (#1–#4) now track the open questions below; work them there.
+**Working prototype** — https://github.com/lux-username/epistemic/milestone/2 (due 2026-07-19). 17 Issues: skills/components #5–#11, cross-cutting behaviors #12–#16, deliverables/validation #17–#21. Work them there. ("Spec complete" milestone closed; Issues #1–#4 closed as resolved by the spec.)
 
 ## Blockers / open questions
 
-- #1 — competition deliverable format & evaluation criteria not yet captured (blocks `spec.md` Requirements).
-- #2 — crux-identification approach undecided (blocks Architecture).
-- #3 — case-study data model undefined (blocks Data model; would create `case-studies/`).
-- #4 — whether any non-markdown tooling is needed at all is still open.
+- None blocking. The build's primary correctness gate is **#19 (self-containment cold-start test)**; **#20 (drift check: skills vs spec)** should run mid-build and before submission to keep spec.md the true design of record.
+- Note: GitHub stores milestone `due_on` as date-only, so #2 displays as `2026-07-19T00:00:00Z` (cosmetic).
