@@ -74,6 +74,10 @@ Editor pass caught the spec selling the artifact as "re-runnable, mechanically r
 
 Editor pass flagged two overclaims that brushed our own calibrated-humility rule. Fixed: (1) VOI/EVPPI is borrowed as a **qualitative reasoning lens** to rank cruxes, not a numeric computation — we have no quantified decision model and claim no EVPPI number. (2) Rootclaim's likelihood-ratio→posterior is borrowed as the **idea** of direction/strength weighting behind step 4's "update toward X by rough magnitude," not the full numeric LR math. Principle: never imply more rigor than the tool delivers. Also fixed a stale contradiction ("we query existing public APIs" in Out of scope) left over from before the tool-agnostic pivot, plus redundancy/polish.
 
+## 2026-07-12 — end-session always pushes after committing
+
+Chose to make `git push` a mandatory final step of the end-session skill rather than leaving it optional/manual. A session isn't closed until its work is on the remote; leaving commits local-only is how a "closed" session silently isn't. On push failure the skill retries once then asks the user to run `! git push` — the commit stands, only the push defers. (Prompted by a network-blocked push from the agent environment this session.)
+
 ## 2026-07-12 — The defensible contribution is the loop, not any single step
 
 The scan found no existing project spanning crux → pending evidence → pre-registered update rule; the pieces live in silos (living reviews own 1+3, Metaculus owns 4's structure, SCORE owns claim credibility, VOI is unused glue). Our novelty is connecting them: VOI-ranked cruxes → registry-driven pending-evidence tracking → pre-committed conditional updates against a GRADE-appraised base. The writeup leads with this positioning so judges see contribution, not reinvention.
