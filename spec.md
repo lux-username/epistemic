@@ -65,7 +65,7 @@ Output: the crux watch-list artifact.
 
 ## Data model — the crux watch-list artifact
 
-The compounding unit. One per question. Markdown with a structured shape (frontmatter + sections); exact serialization TBD during build, but the fields are:
+The compounding unit. One per question. Markdown with a structured shape (frontmatter + sections). The narrative field list and design intent live here; the **concrete serialization is defined in the orchestrator skill** (`.claude/skills/crux-watchlist/SKILL.md` → *Artifact schema*), which is its single home per self-containment. The fields are:
 
 - **question** — as posed, plus operationalized version(s) from step 0, with the primary framing marked and the assumption behind it stated.
 - **as_of** — date the artifact was generated (everything below is relative to it).
