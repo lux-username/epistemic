@@ -59,6 +59,12 @@ b. **Render:**
    The output name must match step 4's journal entry.
 c. Verify `sessions/` is still gitignored: `git check-ignore sessions/` — if not, fix `.gitignore` before committing.
 
-## 7. Commit
+## 7. Commit and push
 
-One commit: session work + all doc updates. Reference closed issues (`fixes #N`). Finish by showing the user `git log --oneline -1` and a one-line summary of what was filed, journaled, and rewritten.
+One commit: session work + all doc updates. Reference closed issues (`fixes #N`).
+
+Then **always push** the commit to its upstream: `git push` (or `git push -u origin <branch>` if the branch has no upstream yet). Pushing is not optional — a session isn't closed until its work is on the remote.
+
+**If the push fails** (network block, auth, no connectivity from this environment): do not retry more than once. Tell the user out loud that the commit is local-only and ask them to run `! git push` from their own terminal. The commit still stands; only the push is deferred.
+
+Finish by showing the user `git log --oneline -1`, the push result (pushed vs. deferred-to-user), and a one-line summary of what was filed, journaled, and rewritten.
