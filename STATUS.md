@@ -1,35 +1,29 @@
-> Generated 2026-07-12 by /end-session at commit a1eb88a.
+> Generated 2026-07-13 by /end-session at commit 2ed81b9.
 
 # STATUS
 
 ## Where things stand
 
-**The functional core is built.** This session authored the entire skillset — all five pipeline stages plus the appraisal component and the orchestrator — as markdown skills under `.claude/skills/`. Hand `crux-watchlist` an open question and it runs steps 0→5 (operationalize → lit-review+grading → find-cruxes → find-pending-evidence → write-update-rules → assemble) and emits the crux watch-list artifact. Contract chain was **paper-traced end-to-end and is clean**; the trace caught one genuine integration requirement (estimand threading into both `appraise-study` calls) now encoded in the orchestrator.
+**First behavioral tests of the prototype are done — and the correctness gate is green for one question.** This session was the *command center*: it planned, then analyzed (the skills were run in separate clean-room sessions, not here). Two runs from the pre-registered #19 design, both on a **non-egg** question (**omega-3 for CVD**), same web-search-+-fetch floor, no connectors:
 
-The skills (each self-contained, web-search-floor, with its own method + refusal condition + Sources-&-methods block):
-- `crux-watchlist` (#5) — orchestrator; also holds the **artifact schema** (#12).
-- `operationalize` (#6), `lit-review` (#7), `appraise-study` (#8, the RoB-2 component), `find-cruxes` (#9), `find-pending-evidence` (#10), `write-update-rules` (#11).
+- **Run B — self-containment / honesty floor: PASS, decisively.** 0 of 5 pre-registered failure modes materialized. The trace confirms all stage skills were actually opened and run (not simulated); all 4 cited registry IDs verify and are accurately described; per-domain RoB appraisal genuinely executed (No-Information valve fired); estimand threaded; cruxes are the real expert disagreement. The clincher: for the load-bearing crux (is REDUCE-IT's benefit a mineral-oil-placebo artifact?) **no confirmatory trial exists, and the run refused to fabricate one** — routing the absence to `gaps[]` as the headline finding. It even found a superficially-perfect trial (MITIGATE) and correctly excluded it (respiratory outcome, not cardiac).
 
-All three schema enums (`grade`, `status`, `confidence`) are finalized and owned by their producing skills — no placeholders remain.
-
-**Nothing has been behaviorally tested, and that is correct** — the honest test must be clean-room (a fresh Claude in a folder of only the skills), which *this* context-rich session cannot be. So the session also **pre-registered an adversarial test design on #19** (predicted failure modes + a 3-run design: framing-matched control / web-search-only honesty run / tooled scalability run) and filed **#22 (de-egg the examples)** — every skill's illustrative snippet is currently eggs/CVD, which would flatter an eggs test, so de-egging gates the eggs showcase (#17).
-
-**Next session is the clean-room validation** — run a *non-egg* in-class question (ideally a #18 case: artificial sweeteners / omega-3 / alcohol J-curve) through the skills per #19's design, score the predictions, fix what breaks, *then* produce the eggs showcase on hardened skills. Deadline **2026-07-19**.
+- **Run A′ — framing-matched control (un-scaffolded base Claude, same task):** ties B on **finding cruxes and the central honest refusal** (base Claude is already good at these on a familiar question), but B wins clearly on **rigor/verification** — A′ ran *zero* fetches (verified nothing), carried one real-but-**observational/surrogate** ID mis-assigned as an RCT resolver, filed an already-reported dialysis trial (PISCES) into the *pending* slot, used numeric false-precision confidences, and did no systematic grading. **Honest conclusion: the method's value is rigor, not gestalt** — which is why the next test must be a *hard* question where base Claude's recall advantage vanishes.
 
 ## Derived facts (from CLAUDE.md commands)
 
-- Tracked `.md` files: **18** (`git ls-files '*.md' | wc -l`) — 9 `SKILL.md` (7 new product skills + 2 workflow) + 6 top-level docs + 3 journal entries.
-- `case-studies/`: does not exist (`ls case-studies/` → 0). No worked example produced yet (that's #17, clean-room).
-- Test status: no automated harness; validation is the clean-room cold-start run (#19).
-- Working tree at derivation: 7 new skill files staged + `decisions.md`, `spec.md` modified — all committed by this end-session. Pre-commit HEAD `a1eb88a`.
-- Open Issues: **10** (#13–#22) — `gh issue list --state open`.
+- Tracked `.md` files: **19** (`git ls-files '*.md' | wc -l`).
+- `case-studies/`: does not exist (`ls case-studies/` → 0). No worked example yet (#17).
+- Test status: no automated harness; validation is the clean-room runs (#19). **Run B passed; A′ control scored.** Records + full scored analyses live in **`../epistemic_tests/`** (a sibling folder, **not** version-controlled — see Blockers).
+- HEAD `2ed81b9`; working tree clean at derivation (this session's work is the doc updates in this commit; test artifacts are external).
+- Open Issues: **11** (#13–#23) — `gh issue list --state open`. New this session: **#23**.
 
 ## Active Milestone
 
-**Working prototype** — https://github.com/lux-username/epistemic/milestone/2 (due 2026-07-19). Core skills (#5–#12) **closed this session**. Remaining 10: cross-cutting #13–#16, quality gate #22 (de-egg, blocks #17), deliverables/validation #17–#21.
+**Working prototype** — https://github.com/lux-username/epistemic/milestone/2 (due 2026-07-19). Correctness gate #19 **met for omega-3** (two scorecards posted as #19 comments). Remaining: cross-cutting #13–#16, #23 (RoB auditability, low), quality gate #22 (de-egg, blocks #17), deliverables/validation #17–#21.
 
 ## Blockers / open questions
 
-- None blocking. Sequencing constraints: **#22 before #17** (de-egg before eggs showcase); **validation before the writeup locks** (#19 → fixes → #21).
-- Cross-cutting #13 (runtime tool detection) is already implemented concretely inside `find-pending-evidence`; #13 becomes "generalize + verify across stages," not net-new. Same pattern likely for #14 (calibrated humility) and #15 (compliance) — much is already threaded through the skills, so those issues are extract/centralize/verify.
-- Primary correctness gate remains **#19**; its pre-registered predictions (see the issue's two 2026-07-12 comments) should be scored honestly after the run.
+- **Test records live outside git.** `../epistemic_tests/` (briefs, rubrics, artifacts, traces, scored analyses for runs B and A′) is a local sibling folder, not a repo — currently un-backed-up. Decide whether to commit a distilled copy into this repo, add it as its own repo, or accept it as scratch. The *conclusions* are preserved in the #19 comments; the raw artifacts are not.
+- **#19 is not fully closed** — omega-3 passed, but it's a *soft* strip (trial-shaped, in training). The honest generalization claim needs the **hard aspartame strip** (regulatory + observational, non-RCT-shaped) — staged conceptually, not yet run. Sequence unchanged: hard validation → fixes → #22 de-egg → #17 eggs showcase → #21 writeup.
+- Scite connector was disconnected at the account level to enforce Run B/A′'s web-search floor; **reconnect before any Run C** (tooled/scalability).
