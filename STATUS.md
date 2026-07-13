@@ -1,29 +1,35 @@
-> Generated 2026-07-13 by /end-session at commit 2ed81b9.
+> Generated 2026-07-13 by /end-session at commit 5cae1d7.
 
 # STATUS
 
 ## Where things stand
 
-**First behavioral tests of the prototype are done — and the correctness gate is green for one question.** This session was the *command center*: it planned, then analyzed (the skills were run in separate clean-room sessions, not here). Two runs from the pre-registered #19 design, both on a **non-egg** question (**omega-3 for CVD**), same web-search-+-fetch floor, no connectors:
+**Session 6 acted on the first test's one real finding: the crux skills were all-prune, no-recall — now fixed, not yet validated.** Session 5 scored the omega-3 Run B (skills) vs A′ (base Claude) comparison and concluded "rigor, not gestalt." Tonight we pushed on the part that stung — *we tied base Claude on crux-finding, and crux-finding is the product's one-sentence pitch.* Reading the actual crux cards (not the count-based scorecard) showed the "tie" was two things: a **scoring artifact** (rubric counted cruxes; A′'s 6-vs-B's-3 included A′ inflating a near-settled question into a live crux) and **one real miss** (B silently dropped the Omega-3-Index / replacement-vs-enhancement camp).
 
-- **Run B — self-containment / honesty floor: PASS, decisively.** 0 of 5 pre-registered failure modes materialized. The trace confirms all stage skills were actually opened and run (not simulated); all 4 cited registry IDs verify and are accurately described; per-domain RoB appraisal genuinely executed (No-Information valve fired); estimand threaded; cruxes are the real expert disagreement. The clincher: for the load-bearing crux (is REDUCE-IT's benefit a mineral-oil-placebo artifact?) **no confirmatory trial exists, and the run refused to fabricate one** — routing the absence to `gaps[]` as the headline finding. It even found a superficially-perfect trial (MITIGATE) and correctly excluded it (respiratory outcome, not cardiac).
+Root cause, confirmed by auditing all seven pipeline skills for a *recall* counterweight to their *pruning* discipline: the failure is concentrated at the **lit-review → find-cruxes seam**, which was purely subtractive. `operationalize` and `write-update-rules` already carry a recall mechanism; the seam did not.
 
-- **Run A′ — framing-matched control (un-scaffolded base Claude, same task):** ties B on **finding cruxes and the central honest refusal** (base Claude is already good at these on a familiar question), but B wins clearly on **rigor/verification** — A′ ran *zero* fetches (verified nothing), carried one real-but-**observational/surrogate** ID mis-assigned as an RCT resolver, filed an already-reported dialysis trial (PISCES) into the *pending* slot, used numeric false-precision confidences, and did no systematic grading. **Honest conclusion: the method's value is rigor, not gestalt** — which is why the next test must be a *hard* question where base Claude's recall advantage vanishes.
+**Four edits made (design-of-record, not yet validated):**
+- **lit-review** — added a **coverage sweep** (§1) for camps a top-down hierarchy search misses, and a §7 requirement to carry minority/dissenting camps forward with evidence status.
+- **find-cruxes** — **candidate-recall sweep as a third source in step 1, *before* pruning** (so every candidate passes the same leverage→liveness→gaps gate — placement chosen deliberately to protect the honesty valve); a **"one gate only"** invariant (never append post-ranking); a **"Considered, not cruxes"** legibility line so a short list reads as a choice, not a miss.
+- **comparison-rubric** (in `../epistemic_tests/`, un-versioned) — rewrote crux dimension to score **quality + completeness (union of both runs + field), not count**.
+
+The design bet: recall at the front + honesty valve at the single exit lets us *out-surface* base Claude without endangering Run B's honesty-floor pass. **Unproven until the hard aspartame strip runs it and scores against the revised rubric.**
 
 ## Derived facts (from CLAUDE.md commands)
 
-- Tracked `.md` files: **19** (`git ls-files '*.md' | wc -l`).
+- Tracked `.md` files: **20** (`git ls-files '*.md' | wc -l`).
 - `case-studies/`: does not exist (`ls case-studies/` → 0). No worked example yet (#17).
-- Test status: no automated harness; validation is the clean-room runs (#19). **Run B passed; A′ control scored.** Records + full scored analyses live in **`../epistemic_tests/`** (a sibling folder, **not** version-controlled — see Blockers).
-- HEAD `2ed81b9`; working tree clean at derivation (this session's work is the doc updates in this commit; test artifacts are external).
-- Open Issues: **11** (#13–#23) — `gh issue list --state open`. New this session: **#23**.
+- Test status: no automated harness; validation is the clean-room runs (#19). **Run B passed (Session 5); crux-recall fix (Session 6) is unvalidated** — the aspartame strip is now both the generalization test *and* this fix's validation.
+- HEAD `5cae1d7`; working tree at derivation: 2 modified skills (`find-cruxes`, `lit-review`) — committed with this session's docs.
+- Open Issues: **18** (#13–#31) — `gh issue list --state open`. New this session: **#25–#31** (one wording-review issue per pipeline skill).
 
 ## Active Milestone
 
-**Working prototype** — https://github.com/lux-username/epistemic/milestone/2 (due 2026-07-19). Correctness gate #19 **met for omega-3** (two scorecards posted as #19 comments). Remaining: cross-cutting #13–#16, #23 (RoB auditability, low), quality gate #22 (de-egg, blocks #17), deliverables/validation #17–#21.
+**Working prototype** — https://github.com/lux-username/epistemic/milestone/2 (due 2026-07-19). Correctness gate #19 met for omega-3; crux-recall fix applied but unvalidated. Remaining: wording reviews #25–#31, cross-cutting #13–#16, RoB auditability #23, quality gate #22 (de-egg, blocks #17), deliverables/validation #17–#21.
 
 ## Blockers / open questions
 
-- **Test records live outside git.** `../epistemic_tests/` (briefs, rubrics, artifacts, traces, scored analyses for runs B and A′) is a local sibling folder, not a repo — currently un-backed-up. Decide whether to commit a distilled copy into this repo, add it as its own repo, or accept it as scratch. The *conclusions* are preserved in the #19 comments; the raw artifacts are not.
-- **#19 is not fully closed** — omega-3 passed, but it's a *soft* strip (trial-shaped, in training). The honest generalization claim needs the **hard aspartame strip** (regulatory + observational, non-RCT-shaped) — staged conceptually, not yet run. Sequence unchanged: hard validation → fixes → #22 de-egg → #17 eggs showcase → #21 writeup.
-- Scite connector was disconnected at the account level to enforce Run B/A′'s web-search floor; **reconnect before any Run C** (tooled/scalability).
+- **The recall fix is a hypothesis, not a result.** Next run must be the **hard aspartame strip**, scored against the revised (quality+completeness) rubric — it validates the fix where base Claude's recall advantage thins. Do not de-egg (#22) or write the showcase (#17) on the assumption the fix works until this run confirms it.
+- **Reversed a registered decision.** Session 5 recorded "no skill fix warranted from A′." Session 6 supersedes that — A′ exposed the all-prune/no-recall gap and we acted. Logged in decisions.md; flagged here so the reversal isn't silent drift.
+- **Test records still live outside git** (#24) — `../epistemic_tests/` now also holds tonight's revised `comparison-rubric.md`. Still un-backed-up; storage decision still pending.
+- **Scite connector** remains disconnected (enforced Run B/A′'s web-search floor); reconnect before any tooled/scalability run.

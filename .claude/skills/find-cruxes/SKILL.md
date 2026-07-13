@@ -27,9 +27,14 @@ The plain-language name for the same idea is **double crux**: a point where, if 
 
 ## Procedure
 
-1. **Assemble candidates.** Start from lit-review's located disagreement, then scan the `current_answer`'s basis for the load-bearing assumptions it rests on. Each is a candidate sub-question.
+1. **Assemble candidates — from three sources, then treat them identically.**
+   - (a) lit-review's located disagreement — **including the minority/dissenting camps** its coverage sweep surfaced, not just the mainstream axis of conflict;
+   - (b) a scan of the `current_answer`'s basis for the load-bearing assumptions it rests on;
+   - (c) a **completeness sweep** — a backstop for anything (a) still missed. Ask: *what sub-questions does the field actively debate that aren't yet on this list?* Prompt yourself across the axes a survey routinely drops — contrarian / mechanism-based dissent, "benefit only in subgroup X," replacement-vs-enhancement, "the effect is a measurement/comparator artifact," dose/threshold effects.
+
+   This sweep runs **before** scoring, on purpose: every candidate from all three sources is one entry, and **all of them flow through steps 2–4 and the gaps routing identically**. The sweep raises recall; it does *not* create a privileged class of crux that skips scoring. A candidate it surfaces but can't substantiate is routed to `gaps[]` by step 6 exactly like any other — never asserted as a crux.
 2. **Score leverage.** For each candidate, ask: if it resolved toward X, what does the overall answer become? Toward Y? The *distance between those two answers* is its leverage. Small distance → drop it.
-3. **Score liveness.** Consult the graded evidence base: is this genuinely open, or does existing high-certainty evidence already settle it? Settled → drop it (note it as established background, not a crux).
+3. **Score liveness.** Consult the graded evidence base: is this genuinely open, or does existing high-certainty evidence already settle it? Settled → don't list it as a crux, but **record it in the artifact's *Considered, not cruxes* line** (see output contract) — so a reader sees it was weighed and demoted, not overlooked. A decision-relevant question resolved upstream (in operationalization, or by high-certainty evidence) is background, and making that demotion *visible* is what keeps a short, honest crux list from reading as a thin one.
 4. **Rank** by leverage × liveness (qualitatively — "this one flips the answer and is wide open" > "this one shifts it a little and is mostly settled"). Keep the handful that genuinely move the answer. **Do not pad to a quota** — a short honest list beats a long dressed-up one.
 5. **Fill each surviving crux:**
    - `statement` — the sub-question, phrased as a double crux (resolvable, with the two directions implied).
@@ -43,6 +48,7 @@ The plain-language name for the same idea is **double crux**: a point where, if 
 
 - **No identifiable crux.** If the answer isn't materially sensitive to any locatable sub-question — because the evidence is uniformly strong (settled) or uniformly absent (nothing to hinge on) — say so plainly rather than manufacturing cruxes. Uniform absence routes to `gaps[]` with `current_answer` confidence `insufficient-evidence`; uniform strength means a short "no live cruxes; the answer is settled" is the honest output.
 - **Never invent a crux to look thorough.** A fabricated crux propagates into a fabricated watch-list item and a fabricated update rule — the worst failure mode, three steps of confident fiction from one padded list. When unsure whether something is a crux, it goes to `gaps[]`, not the list.
+- **One gate only.** Every candidate — whoever surfaced it, *including the step-1 completeness sweep* — enters the crux list solely by passing leverage + liveness scoring. **Never append a crux to the output after ranking** (e.g. from a late "did I miss anything?" pass); if a late check surfaces something, send it back through step 1 to be scored and routed. A crux that skipped the gate is exactly how an unsubstantiated sub-question slips in dressed as established — which is the failure the gaps valve exists to prevent. Recall belongs at the front; the honesty valve guards the single exit.
 
 ## Output contract (illustrative)
 
@@ -58,7 +64,14 @@ The plain-language name for the same idea is **double crux**: a point where, if 
   but indirect to this crux).
 
 ## C2 — ...
+
+**Considered, not cruxes:** *whether ordinary dietary cholesterol raises LDL — near-settled
+yes (high-certainty feeding trials), so treated as established background, not a live crux.*
 ```
+The **Considered, not cruxes** line (one or two items) makes the pruning visible: a short crux
+list is then legibly a *choice* — decision-relevant questions were weighed and demoted as settled
+— not a failure to look. Omit the line only when nothing decision-relevant was demoted.
+
 Suspected-but-unsubstantiated (→ `gaps[]`), e.g.: *"dose-response above 2 eggs/day may
 be a crux, but no study stratifies finely enough to show the answer hinges on it —
 not asserted as a crux."*

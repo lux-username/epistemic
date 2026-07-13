@@ -25,6 +25,8 @@ Do not try to grade per-crux here — the cruxes don't exist yet. Locate *where*
 ### 1. Discover the evidence
 Search for the current evidence on the operationalized question, prioritizing by the standard hierarchy: systematic reviews / meta-analyses → randomized trials → cohorts → case-control / cross-sectional → mechanistic or expert opinion. Note recency — this question class is *fast-moving*, so favor the current evidence and flag anything likely superseded.
 
+**Coverage sweep — don't only search top-down.** The hierarchy search surfaces the mainstream, well-powered evidence; it systematically *under*-surfaces the debate's minority positions — the mechanism-based dissent, the "benefit only in subgroup X" hypothesis, the replacement-vs-enhancement reframing, the "the whole effect is a measurement/comparator artifact" objection. These are exactly where cruxes hide, and a naive survey drops them silently. So before moving on, run a **deliberate sweep for the camps a hierarchy search misses**: query the named controversy, the critiques-and-rebuttals literature, the "why trial X contradicts trial Y" analyses, the "who benefits" subgroup debate. Each camp surfaced enters with its evidence attached and is graded like any other claim — **recall goes up, the bar for belief does not**. A camp you can't source is not dropped silently: it goes to `gaps[]` as an unsubstantiated-but-debated position, never asserted as established.
+
 ### 2. Extract claims with provenance
 Pull the key claims that bear on the question. Every claim carries: the **source** (citation + link), its **study type**, its reported **effect/direction**, and its **population/outcome/exposure** (to check indirectness later). A claim with no locatable source is not a claim — it goes to `gaps[]`, never into the evidence base.
 
@@ -54,6 +56,8 @@ Weight higher-certainty evidence more heavily; keep low-quality claims visible b
 
 ### 7. Locate the disagreement (hand-off to step 2)
 State **where the disagreement actually lives** — the sub-questions on which high-quality evidence conflicts, is missing, or is indirect. These are the **candidate cruxes** `find-cruxes` (#9) will rank. This is the single most important output for the rest of the pipeline: a good current_answer with the disagreement mislocated produces a useless watch-list.
+
+The located disagreement must include the **minority and dissenting camps** from step 1's coverage sweep, not only the mainstream axis of conflict — a sub-question the field actively argues but the top of the hierarchy ignores is precisely what a naive survey drops, and it is often the highest-leverage crux. Carry each camp's evidence status (well-supported / thin / unsubstantiated-but-debated) alongside it, so step 2 can rank *and* correctly route it — a debated-but-unsubstantiated camp is a real candidate to hand forward, not a claim to assert.
 
 ## When to refuse / route to gaps
 
