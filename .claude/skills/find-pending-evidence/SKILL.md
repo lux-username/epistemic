@@ -18,7 +18,7 @@ This is the second half of the novel seam: crux → **pending evidence**. Living
 
 Ongoing or upcoming evidence-gathering whose result isn't in yet: **registered trials** (recruiting/active), **prospective cohorts** with a scheduled readout, **pending systematic reviews** (PROSPERO-registered, not yet published), **pre-registered studies** with a stated completion date. Not pending: a preprint already posted, a published paper (that's step 1 evidence), or a vague "more research is needed."
 
-**Relevance gate (hard).** A study only makes the watch-list if what it **measures would actually move its crux**. A trial measuring LDL does not resolve a crux about CVD *events*; a cohort in diabetics does not resolve a crux about healthy adults. State in `measures` *how* the readout maps to the crux's resolution — that mapping is what step 4 writes update rules against. Tangentially-related trials listed to look thorough are the same failure as a padded crux list: they manufacture a false sense that the crux is being watched.
+**Relevance gate (hard).** A study only makes the watch-list if what it **measures would actually move its crux**. A trial measuring serum 25(OH)D does not resolve a crux about fracture *events*; a cohort in deficient adults does not resolve a crux about replete adults. State in `measures` *how* the readout maps to the crux's resolution — that mapping is what step 4 writes update rules against. Tangentially-related trials listed to look thorough are the same failure as a padded crux list: they manufacture a false sense that the crux is being watched.
 
 ## Runtime tool detection (role, not tool)
 
@@ -30,15 +30,13 @@ This step needs a **role filled — "a lookup of registered ongoing/upcoming stu
 
 Absence of a tool changes **thoroughness, never whether the step runs**. On the web-search floor: `site:clinicaltrials.gov` and `site:who.int/ictrp` searches plus fetching the trial record yield status and estimated completion date; PROSPERO pages yield in-progress reviews. This is best-effort, not systematic coverage — and that limitation is disclosed, not hidden (below).
 
-> This runtime-detection pattern is implemented concretely here because step 3 is the first real retrieval step; cross-cutting issue #13 generalizes it across every stage skill that retrieves. Keep this section consistent with #13 when that lands.
-
 **Retrieval is live and uncached** — query fresh each run so the watch-list reflects current registry reality (status and dates change). Consequence: runs aren't reproducible, and coverage depends on what's reachable at the time. Both are accepted tradeoffs, and both are disclosed in the artifact.
 
 ## Field discipline
 
 - `source` — the real registry ID + link (e.g. `NCT########`, `CRD#########`, ISRCTN). **Never fabricate an ID.** If you can't verify a study exists with a real identifier, it does not go on the list — an invented trial is the worst possible failure here, a fictional promise of future resolution.
 - `measures` — the outcome/endpoint *and* how it maps to the crux (the hook step 4 needs).
-- `status` — one of: `recruiting | active | completed-unpublished | reported | terminated | withdrawn | unknown`. (This skill owns this enum; it finalizes the schema's placeholder.) Use `unknown` when the registry doesn't say, with a note.
+- `status` — one of: `recruiting | active | completed-unpublished | reported | terminated | withdrawn | unknown`. (This skill owns this enum.) Use `unknown` when the registry doesn't say, with a note.
 - `expected_report_date` — from the registry's estimated primary-completion / study-completion date. May be `unknown` (e.g. registered but no date posted) — write `unknown — <reason>`, never guess a date.
 
 ## When to route to gaps
@@ -53,20 +51,20 @@ Absence of a tool changes **thoroughness, never whether the step runs**. On the 
   Watch-list:
   - crux_ref: C1
     source: NCT01234567 — https://clinicaltrials.gov/study/NCT01234567
-    measures: MACE (hard CVD events) at 4y in adults with elevated LDL —
-      directly tests whether egg-derived cholesterol raises *events*, not just LDL
+    measures: fractures / MACE (hard events) at 4y in baseline-deficient adults —
+      directly tests whether raising 25(OH)D cuts *events* in the deficient subgroup, not just the biomarker
     status: recruiting
     expected_report_date: 2027-Q2
   - crux_ref: C1
     source: CRD42025XXXXXX (PROSPERO) — <link>
-    measures: pooled CVD events across egg-intake cohorts
+    measures: pooled fracture events across deficiency-stratified trials
     status: unknown — protocol registered, no timeline posted
     expected_report_date: unknown
 ```
-For a crux with nothing found → `gaps[]`: *"C3 (dose-response ≥2/day) is live but no
+For a crux with nothing found → `gaps[]`: *"C3 (dose-response ≥4000 IU/day) is live but no
 registered trial or review located that stratifies dose finely enough."*
 
-Values above are **illustrative**, not a worked case; the real eggs example is #17.
+Values above are **illustrative**, not a worked case.
 
 ## Sources & methods
 

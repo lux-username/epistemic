@@ -55,7 +55,7 @@ Weight higher-certainty evidence more heavily; keep low-quality claims visible b
 - **basis** — one paragraph: what the weighted evidence shows and why the confidence is what it is.
 
 ### 7. Locate the disagreement (hand-off to step 2)
-State **where the disagreement actually lives** — the sub-questions on which high-quality evidence conflicts, is missing, or is indirect. These are the **candidate cruxes** `find-cruxes` (#9) will rank. This is the single most important output for the rest of the pipeline: a good current_answer with the disagreement mislocated produces a useless watch-list.
+State **where the disagreement actually lives** — the sub-questions on which high-quality evidence conflicts, is missing, or is indirect. These are the **candidate cruxes** `find-cruxes` will rank. This is the single most important output for the rest of the pipeline: a good current_answer with the disagreement mislocated produces a useless watch-list.
 
 The located disagreement must include the **minority and dissenting camps** from step 1's coverage sweep, not only the mainstream axis of conflict — a sub-question the field actively argues but the top of the hierarchy ignores is precisely what a naive survey drops, and it is often the highest-leverage crux. Carry each camp's evidence status (well-supported / thin / unsubstantiated-but-debated) alongside it, so step 2 can rank *and* correctly route it — a debated-but-unsubstantiated camp is a real candidate to hand forward, not a claim to assert.
 
@@ -70,18 +70,20 @@ The located disagreement must include the **minority and dissenting camps** from
 ```markdown
 # Current answer
 
-**Answer:** Roughly neutral for CVD in healthy adults at ~1 egg/day.
-**Confidence:** low
-**Basis:** Large prospective cohorts (body certainty: Low — observational start,
-downgraded for residual-confounding risk of bias, no serious inconsistency) cluster
-near null; the one feeding RCT addresses LDL, not events (indirect). No high-certainty
-body supports a non-null effect in this population.
+**Answer:** Roughly neutral for CVD, cancer, and fractures in replete healthy adults at 2000 IU/day.
+**Confidence:** moderate
+**Basis:** Large RCTs (body certainty: Moderate — RCT start, downgraded for indirectness
+to deficient subgroups and some inconsistency on fractures) cluster near null for hard
+events; supplementation reliably raises serum 25(OH)D, but that biomarker rise has not
+translated to event reduction in replete adults. Benefit, if any, concentrates in
+baseline-deficient subgroups where the trial evidence is thinner.
 ```
 Plus, passed forward (not user-facing): the graded evidence base and the located
-disagreement points — e.g. *"conflict lives in whether cholesterol-response
-subgroups exist, and in diabetics where cohorts diverge"* → candidate cruxes for #9.
+disagreement points — e.g. *"conflict lives in whether a baseline-deficient subgroup
+gets real event/fracture benefit, and in older adults where trials diverge"* →
+candidate cruxes for `find-cruxes`.
 
-Values above are **illustrative**, not a worked case; the real eggs example is #17.
+Values above are **illustrative**, not a worked case.
 
 ## Sources & methods
 

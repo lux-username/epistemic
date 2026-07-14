@@ -51,21 +51,22 @@ Set the artifact's `recheck_on` from the watch-list's **earliest meaningful `exp
 
 ```markdown
   Update rules:                          # under crux C1, keyed to its watch-list
-  - on: NCT01234567 (MACE at 4y, elevated-LDL adults)
-    - if ↑MACE, CI excludes null → toward "limit for elevated-LDL adults", **moderate**
+  - on: NCT01234567 (fractures/MACE at 4y, baseline-deficient adults)
+    - if ↓events, CI excludes null → toward "supplement if deficient", **moderate**
       (large RCT on hard events, directly on-crux)
-    - if null (CI around no effect) → toward "fine", **small** (confirmatory of cohorts)
+    - if null (CI around no effect) → toward "neutral even if deficient", **small**
+      (confirmatory of the replete-population null)
     - if underpowered / terminated / unreported → **no update**; note in gaps
-  - on: CRD42025XXXXXX (pooled CVD events)
-    - if pooled effect ≠ null → toward "limit", **small** (observational pooling; residual
-      confounding caps the update)
-    - if null → toward "fine", **negligible**
+  - on: CRD42025XXXXXX (pooled fracture events)
+    - if pooled effect ≠ null → toward "benefit in deficient", **small** (meta-analytic
+      pooling; between-trial heterogeneity caps the update)
+    - if null → toward "neutral", **negligible**
     - if never published → no update; gaps note
 
 recheck_on: 2027-Q2   # earliest meaningful expected_report_date on the watch-list
 ```
 
-Values above are **illustrative**, not a worked case; the real eggs example is #17.
+Values above are **illustrative**, not a worked case.
 
 ## Sources & methods
 

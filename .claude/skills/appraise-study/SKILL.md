@@ -23,7 +23,7 @@ Every signaling question is answered with exactly one of: **Yes · Probably Yes 
 ## Study-type gate (run first)
 
 - **Randomized trial** → run all five domains below.
-- **Non-randomized** (cohort, case-control, cross-sectional — most nutritional-epidemiology evidence) → the randomization and ITT machinery doesn't apply cleanly. Report `design: non-RCT`, run Domains 3–5 (they transfer), replace Domain 1 with a single confounding check (*"Were the main confounders for this crux identified and adjusted for?"*, `low_risk_when: Yes`), **cap the overall grade at `some-concerns`**, and hand the body-of-evidence certainty judgment to `lit-review`'s GRADE step (#7). Rationale: honestly flagging "this needs a different instrument" beats forcing an RCT tool onto a cohort.
+- **Non-randomized** (cohort, case-control, cross-sectional — most observational evidence) → the randomization and ITT machinery doesn't apply cleanly. Report `design: non-RCT`, run Domains 3–5 (they transfer), replace Domain 1 with a single confounding check (*"Were the main confounders for this crux identified and adjusted for?"*, `low_risk_when: Yes`), **cap the overall grade at `some-concerns`**, and hand the body-of-evidence certainty judgment to `lit-review`'s GRADE step. Rationale: honestly flagging "this needs a different instrument" beats forcing an RCT tool onto a cohort.
 
 ## The five domains
 
@@ -120,13 +120,13 @@ gap_flags:
   - { domain: D5_selective_reporting, note: "no pre-registered protocol located" }
 ```
 
-Values above are **illustrative**, not a worked case; the real eggs example is #17.
+Values above are **illustrative**, not a worked case.
 
 ## Sources & methods
 
 We adapt the **mechanism** of the Cochrane **RoB 2** tool — its five-domain structure, five-point response set including *No Information*, and factual-questions-then-fixed-algorithm division of labor — under 17 U.S.C. § 102(b) (methods aren't copyrightable, only their specific expression). **All signaling-question wording and all aggregation rules here are our own**, authored from each domain's bias mechanism; none reproduce or paraphrase Cochrane's text (RoB 2 signaling questions are CC BY-NC-ND — describe only).
 
 - **RoB 2** — Sterne JAC, Savović J, Page MJ, et al. *BMJ* 2019;366:l4898.
-- Body-of-evidence certainty (High/Moderate/Low/Very-low) is **GRADE** (GRADE Working Group), applied by `lit-review` (#7). This tool grades individual results only; it is **not** GRADE and does not carry Cochrane's endorsement.
+- Body-of-evidence certainty (High/Moderate/Low/Very-low) is **GRADE** (GRADE Working Group), applied by `lit-review`. This tool grades individual results only; it is **not** GRADE and does not carry Cochrane's endorsement.
 
 *Named frameworks and products are trademarks of their owners; mention is not endorsement.*

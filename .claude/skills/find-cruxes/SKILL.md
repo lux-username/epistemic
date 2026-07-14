@@ -55,28 +55,28 @@ The plain-language name for the same idea is **double crux**: a point where, if 
 ```markdown
 # Cruxes
 
-## C1 — Does dietary cholesterol from eggs raise CVD events independent of overall diet pattern?
-- **why_it_moves:** if yes → answer shifts from "neutral" toward "limit for at-risk
-  groups"; if no → current neutral stance holds and firms up. High leverage, live
-  (cohorts confounded by diet pattern; no RCT on events).
-- **current_evidence:** 2 large cohorts near-null (grade: `some-concerns` — residual
-  confounding); 1 feeding RCT on LDL only, not events (grade: `low` for its endpoint,
-  but indirect to this crux).
+## C1 — Does raising serum 25(OH)D via supplementation cut hard events (fractures/CVD) in baseline-deficient adults, independent of the replete-population null?
+- **why_it_moves:** if yes → answer shifts from "neutral, skip it" toward "supplement
+  the deficient"; if no → current neutral stance holds and firms up. High leverage, live
+  (main RCTs enrolled mostly replete adults; deficiency-stratified evidence thin).
+- **current_evidence:** large RCTs near-null overall (grade: `some-concerns` — enrolled
+  few deficient participants, indirect to this crux); deficiency-stratified subgroup
+  analyses suggestive but underpowered (grade: `low` for that endpoint).
 
 ## C2 — ...
 
-**Considered, not cruxes:** *whether ordinary dietary cholesterol raises LDL — near-settled
-yes (high-certainty feeding trials), so treated as established background, not a live crux.*
+**Considered, not cruxes:** *whether supplementation raises serum 25(OH)D — near-settled
+yes (high-certainty dosing trials), so treated as established background, not a live crux.*
 ```
 The **Considered, not cruxes** line (one or two items) makes the pruning visible: a short crux
 list is then legibly a *choice* — decision-relevant questions were weighed and demoted as settled
 — not a failure to look. Omit the line only when nothing decision-relevant was demoted.
 
-Suspected-but-unsubstantiated (→ `gaps[]`), e.g.: *"dose-response above 2 eggs/day may
-be a crux, but no study stratifies finely enough to show the answer hinges on it —
+Suspected-but-unsubstantiated (→ `gaps[]`), e.g.: *"dose-response above 4000 IU/day may
+be a crux, but no trial stratifies dose finely enough to show the answer hinges on it —
 not asserted as a crux."*
 
-Values above are **illustrative**, not a worked case; the real eggs example is #17.
+Values above are **illustrative**, not a worked case.
 
 ## Sources & methods
 

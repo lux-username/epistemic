@@ -7,7 +7,7 @@ description: For an open, fast-moving empirical question, produce a dated crux w
 
 Orchestrator. Takes an open question in the class (unresolved *and* fast-moving in new study evidence), runs the 5-step pipeline, and emits one **crux watch-list artifact** in the schema below.
 
-The artifact is the compounding unit — a self-contained, hand-offable file someone else can fold into a larger epistemic project, disagree with cell-by-cell, and act on when a watched study reports. See `spec.md` for the design of record.
+The artifact is the compounding unit — a self-contained, hand-offable file someone else can fold into a larger epistemic project, disagree with cell-by-cell, and act on when a watched study reports.
 
 ## Orchestration (steps 0–5)
 
@@ -67,7 +67,7 @@ Either token may carry a trailing ` — <note>` giving the reason (e.g. `unknown
 
 ```yaml
 schema_version: 1
-question_id: eggs-cardio          # slug; matches the filename
+question_id: vitamin-d-events     # slug; matches the filename
 as_of: 2026-07-12                 # date generated; everything below is relative to it
 recheck_on: 2026-11-01            # date to re-run/revisit — or: insufficient-evidence
 ```
@@ -77,56 +77,59 @@ recheck_on: 2026-11-01            # date to re-run/revisit — or: insufficient-
 ```markdown
 # Question
 
-**Posed:** Are eggs good or bad for you?
+**Posed:** Should adults take a daily vitamin D supplement?
 
 **Operationalizations:**
-- `[primary]` In healthy non-diabetic adults, does habitual egg intake (≈1/day)
-  affect cardiovascular disease risk over 5–10 years?
-  *Assumption:* CVD is the most decision-relevant outcome for the general asker.
-- In type-2 diabetics, same exposure and outcome. *(carried alternative)*
+- `[primary]` In replete (non-deficient) healthy adults, does daily vitamin D
+  supplementation (2000 IU/day vs placebo) affect fracture and cardiovascular
+  events over ~5 years?
+  *Assumption:* hard events (fractures, CVD) are the most decision-relevant outcome
+  for the general asker.
+- In baseline-deficient adults, same exposure and outcome. *(carried alternative)*
 - Effect on all-cause mortality. *(carried alternative)*
 
 # Current answer
 
-**Answer:** Roughly neutral for CVD in healthy adults at ~1/day.
-**Confidence:** low            <!-- high | moderate | low | insufficient-evidence -->
-**Basis:** Large prospective cohorts cluster near null; confounding by overall diet
-pattern is unresolved and no recent RCT powers hard endpoints. (one paragraph)
+**Answer:** Roughly neutral for CVD, cancer, and fractures in replete adults at 2000 IU/day.
+**Confidence:** moderate       <!-- high | moderate | low | insufficient-evidence -->
+**Basis:** Large RCTs (VITAL and peers) cluster near null for hard events; supplementation
+raises serum 25(OH)D but that rise hasn't translated to event reduction in replete adults,
+and the deficiency-stratified subgroup evidence is thin. (one paragraph)
 
 # Cruxes
 
-## C1 — Does dietary cholesterol from eggs raise CVD events, independent of diet pattern?
+## C1 — Does raising serum 25(OH)D via supplementation cut hard events (fractures/CVD) in baseline-deficient adults, independent of the replete-population null?
 
-- **why_it_moves:** If yes, the answer flips from "fine" toward "limit for at-risk
-  groups"; if no, current neutral stance holds.
-- **current_evidence:** 2 large cohorts near-null (grade: `some-concerns`, residual
-  confounding); 1 feeding RCT on LDL only, not events (grade: `low` for its
-  actual endpoint). <!-- grade = risk-of-bias from appraise-study (#8) -->
+- **why_it_moves:** If yes, the answer shifts from "neutral, skip it" toward "supplement
+  the deficient"; if no, the current neutral stance holds.
+- **current_evidence:** large RCTs near-null overall (grade: `some-concerns`, enrolled
+  few deficient participants); deficiency-stratified subgroup analyses suggestive but
+  underpowered (grade: `low` for that endpoint). <!-- grade = risk-of-bias from appraise-study -->
 
   **Watch-list:**
   - `source:` NCT01234567 — https://clinicaltrials.gov/study/NCT01234567
-    `measures:` MACE at 4y in adults with elevated LDL
-    `status:` recruiting            <!-- provisional enum; owned by #10 -->
+    `measures:` fractures/MACE at 4y in baseline-deficient adults
+    `status:` recruiting            <!-- status enum owned by find-pending-evidence -->
     `expected_report_date:` 2027-Q2
   - `source:` PROSPERO-CRD4202X (pending meta-analysis)
-    `measures:` pooled CVD events
+    `measures:` pooled fracture events across deficiency-stratified trials
     `status:` unknown — protocol registered, no timeline posted
     `expected_report_date:` unknown
 
   **Update rules:**       <!-- if_outcome → direction + rough magnitude -->
-  - If NCT01234567 finds ↑MACE (CI excludes null) → toward "limit for elevated-LDL
-    adults", **moderate** shift.
-  - If NCT01234567 finds null → toward "fine", **small** shift (confirmatory).
+  - If NCT01234567 finds ↓events (CI excludes null) → toward "supplement if
+    deficient", **moderate** shift.
+  - If NCT01234567 finds null → toward "neutral", **small** shift (confirmatory).
   - If terminated/underpowered → no update; note in gaps.
 
 ## C2 — ...
 
 # Gaps
 
-- Suspected crux — dose-response above 2 eggs/day — no cohort stratifies finely
+- Suspected crux — dose-response above 4000 IU/day — no trial stratifies dose finely
   enough to substantiate; not asserted. (`insufficient-evidence`)
-- Live crux with **no** pending evidence found: interaction with baseline diet
-  quality — no registered trial isolates it. (a finding in itself)
+- Live crux with **no** pending evidence found: interaction with baseline sun exposure /
+  latitude — no registered trial isolates it. (a finding in itself)
 ```
 
 ### Field reference
@@ -146,8 +149,8 @@ pattern is unresolved and no recent RCT powers hard endpoints. (one paragraph)
 
 **Enums** (defined by the skill that owns each field; listed here for reference):
 
-- `confidence`: `high | moderate | low | insufficient-evidence` — owned by **lit-review (#7)**.
-- per-source validity `grade`: `low | some-concerns | high` — the risk-of-bias output of **`appraise-study` (#8)** (with `insufficient-evidence` for non-appraisable sources, and unjudgeable domains routed to `gaps[]`). The body-of-evidence certainty (GRADE High/Moderate/Low/Very-low) is a separate roll-up owned by **lit-review (#7)**.
-- watch `status`: `recruiting | active | completed-unpublished | reported | terminated | withdrawn | unknown` — owned by **find-pending-evidence (#10)**; `unknown` when the registry doesn't say.
+- `confidence`: `high | moderate | low | insufficient-evidence` — owned by **lit-review**.
+- per-source validity `grade`: `low | some-concerns | high` — the risk-of-bias output of **`appraise-study`** (with `insufficient-evidence` for non-appraisable sources, and unjudgeable domains routed to `gaps[]`). The body-of-evidence certainty (GRADE High/Moderate/Low/Very-low) is a separate roll-up owned by **lit-review**.
+- watch `status`: `recruiting | active | completed-unpublished | reported | terminated | withdrawn | unknown` — owned by **find-pending-evidence**; `unknown` when the registry doesn't say.
 
-The example values above are **illustrative**, not a worked case; the real eggs example is #17.
+The example values above are **illustrative**, not a worked case.

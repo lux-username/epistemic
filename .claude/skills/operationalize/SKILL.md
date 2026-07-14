@@ -1,6 +1,6 @@
 ---
 name: operationalize
-description: Step 0 of the crux-watchlist pipeline. Turns an open, underspecified empirical question ("are eggs bad for you?") into decision-relevant, testable framings — proposing them itself from the literature, picking the load-bearing one as primary, carrying the alternatives, and declaring the estimand (assignment vs adherence). Never demands information the user lacks. Runs on web search alone.
+description: Step 0 of the crux-watchlist pipeline. Turns an open, underspecified empirical question ("should adults take a vitamin D supplement?") into decision-relevant, testable framings — proposing them itself from the literature, picking the load-bearing one as primary, carrying the alternatives, and declaring the estimand (assignment vs adherence). Never demands information the user lacks. Runs on web search alone.
 ---
 
 # operationalize
@@ -20,12 +20,12 @@ The question as posed is almost always underspecified — good/bad **for whom**,
 
 Search the literature for how this question is actually studied, then enumerate the decision-relevant framings on each axis. Do not invent axes the evidence doesn't populate; do not collapse axes the evidence separates.
 
-| Axis | The question it forces | Egg example (illustrative) |
+| Axis | The question it forces | Vitamin D example (illustrative) |
 |---|---|---|
-| **Population — for whom** | Whose risk/benefit? Healthy adults, a diagnosed subgroup, an age/sex stratum? | healthy non-diabetic adults · type-2 diabetics · familial hypercholesterolemia |
-| **Outcome — good/bad how** | Which endpoint carries the decision? A hard event, a biomarker, all-cause mortality? | CVD events · LDL cholesterol · all-cause mortality |
-| **Dose / exposure — how much** | What contrast is even on the table? Define the exposure and its comparator. | ~1 egg/day vs ~0 · ≥2/day vs ≤1/wk |
-| **Horizon — over what time** | Over what follow-up does the effect accrue or fade? | 5–10 y · lifetime |
+| **Population — for whom** | Whose risk/benefit? Healthy adults, a diagnosed subgroup, an age/sex stratum? | replete healthy adults · baseline-deficient adults · older / institutionalized adults |
+| **Outcome — good/bad how** | Which endpoint carries the decision? A hard event, a biomarker, all-cause mortality? | fracture / CVD events · serum 25(OH)D · all-cause mortality |
+| **Dose / exposure — how much** | What contrast is even on the table? Define the exposure and its comparator. | 2000 IU/day vs placebo · high-dose bolus (≥100,000 IU/mo) vs daily |
+| **Horizon — over what time** | Over what follow-up does the effect accrue or fade? | ~5 y · lifetime |
 
 A framing is one coherent pick across all four axes. Enumerate the handful that are decision-relevant — not the full combinatorial grid.
 
@@ -36,7 +36,7 @@ For every framing, state **which effect the question is about** — this is inhe
 - **Assignment / intention-to-treat (ITT)** — the effect of *being advised/assigned* the exposure, adherence imperfections included. The real-world, policy-relevant effect. Under this estimand, dropout and non-adherence are part of the answer, not bias.
 - **Adherence / per-protocol (PP)** — the effect of *actually taking* the exposure as specified. The biological-efficacy effect. Under this estimand, differential adherence and loss to follow-up *are* bias and must be handled.
 
-For observational questions ("do people who eat eggs get more CVD?"), name the **target trial** the cohort is emulating and which of its estimands is meant. Default to the estimand a typical asker's decision needs (usually ITT/real-world) and say so; carry the other only if a crux plausibly turns on it.
+For observational questions ("do people with low vitamin D get more disease?"), name the **target trial** the cohort is emulating and which of its estimands is meant. Default to the estimand a typical asker's decision needs (usually ITT/real-world) and say so; carry the other only if a crux plausibly turns on it.
 
 ### 3. Pick the load-bearing primary; carry the rest
 
@@ -48,9 +48,9 @@ Every primary pick embeds an assumption about who's asking and what they care ab
 
 ### 5. Offer, never gate
 
-If a plausible asker would want a *different* primary (a diabetic, an athlete, a specific dose), surface that as an **offer in the output**, not a question back:
+If a plausible asker would want a *different* primary (a deficient subgroup, a specific dose, a different outcome), surface that as an **offer in the output**, not a question back:
 
-> *If you care specifically about type-2 diabetics, re-run noting that — the primary framing below assumes a healthy general adult.*
+> *If you care specifically about vitamin-D-deficient adults, re-run noting that — the primary framing below assumes a replete general adult.*
 
 Then proceed with the default. The skill must complete regardless of whether the user ever responds.
 
@@ -67,19 +67,20 @@ Refusal here is scoped, never silent (see the "we don't know" convention in the 
 ```markdown
 # Question
 
-**Posed:** Are eggs good or bad for you?
+**Posed:** Should adults take a daily vitamin D supplement?
 
 **Operationalizations:**
-- `[primary]` In healthy non-diabetic adults, does habitual egg intake (~1/day vs ~0)
-  affect cardiovascular disease **events** over 5–10 years?
-  *Estimand:* assignment / real-world intake (ITT-analogue; emulates a target trial
-  advising 1 egg/day). *Assumption:* CVD events are the most decision-relevant outcome
-  for the general asker.
-- In type-2 diabetics, same exposure and outcome. *(carried alternative)*
+- `[primary]` In replete (non-deficient) healthy adults, does daily vitamin D
+  supplementation (2000 IU/day vs placebo) affect fracture and cardiovascular
+  **events** over ~5 years?
+  *Estimand:* assignment / intention-to-treat (emulates a target trial assigning
+  2000 IU/day — a VITAL-analogue). *Assumption:* hard events (fractures, CVD) are the
+  most decision-relevant outcome for the general asker.
+- In baseline-deficient adults, same exposure and outcome. *(carried alternative)*
 - Effect on all-cause mortality, healthy adults. *(carried alternative)*
 
-> If you care specifically about a diagnosed subgroup or a high dose (≥2/day), re-run
-> noting that — the primary assumes a healthy general adult at ~1/day.
+> If you care specifically about a deficient subgroup or high-dose bolus dosing, re-run
+> noting that — the primary assumes a replete general adult at 2000 IU/day.
 ```
 
-Values above are **illustrative**, not a worked case; the real eggs example is #17.
+Values above are **illustrative**, not a worked case.
