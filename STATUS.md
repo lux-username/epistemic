@@ -21,7 +21,7 @@ The de-egg then widened into a **maintainer-note / project-reference sweep**. Re
 - `case-studies/`: does not exist (`ls case-studies/` → 0). No worked example yet (#17).
 - Test status: no automated harness; validation is the clean-room runs (#19). **Run B passed (Session 5); the crux-recall fix (Session 6) remains unvalidated** — the aspartame strip is still both the generalization test *and* that fix's validation.
 - HEAD `7057485`; working tree at derivation: **7 modified skills** (the de-egg + generality sweep) — committed with this session's docs.
-- Open Issues: **18** (#13–#31) at derivation — `gh issue list --state open`. This session **closes #22**; none filed. Post-commit: 17 open.
+- Open Issues: **19** (#13–#31) at derivation — `gh issue list --state open`. This session **closes #22**; none filed. Now: **18** open.
 
 ## Active Milestone
 
